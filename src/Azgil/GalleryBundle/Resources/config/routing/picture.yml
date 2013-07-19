@@ -1,0 +1,30 @@
+gallery:
+    pattern:  /
+    defaults: { _controller: "AzgilGalleryBundle:Picture:index" }
+
+gallery_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AzgilGalleryBundle:Picture:show" }
+
+gallery_new:
+    pattern:  /new
+    defaults: { _controller: "AzgilGalleryBundle:Picture:new" }
+
+gallery_create:
+    pattern:  /create
+    defaults: { _controller: "AzgilGalleryBundle:Picture:create" }
+    requirements: { _method: post }
+
+gallery_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "AzgilGalleryBundle:Picture:edit" }
+
+gallery_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "AzgilGalleryBundle:Picture:update" }
+    requirements: { _method: post|put }
+
+gallery_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "AzgilGalleryBundle:Picture:delete" }
+    requirements: { _method: post|delete }

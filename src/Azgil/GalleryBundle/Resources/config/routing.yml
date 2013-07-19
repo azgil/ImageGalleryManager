@@ -1,0 +1,7 @@
+azgil_gallery_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: AzgilGalleryBundle:Default:index }
+
+AzgilGalleryBundle_gallery:
+    resource: "@AzgilGalleryBundle/Resources/config/routing/picture.yml"
+    prefix:   /gallery

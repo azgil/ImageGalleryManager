@@ -1,0 +1,7 @@
+azgil_category_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: AzgilCategoryBundle:Default:index }
+
+AzgilCategoryBundle_category:
+    resource: "@AzgilCategoryBundle/Resources/config/routing/category.yml"
+    prefix:   /category
