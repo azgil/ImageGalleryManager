@@ -10,4 +10,8 @@ class DefaultController extends Controller
     {
         return $this->render('AzgilGalleryBundle:Default:index.html.twig', array('name' => $name));
     }
+    
+    public function showImageAction(){
+        return $this->render('AzgilGalleryBundle:Default:showimage.html.twig', array('name' => '$name'));
+    }
 }

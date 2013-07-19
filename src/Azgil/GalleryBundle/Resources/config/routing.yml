@@ -2,6 +2,10 @@ azgil_gallery_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: AzgilGalleryBundle:Default:index }
 
+azgil_gallery_showimageaction:
+    pattern: /showimage
+    defaults: { _controller: AzgilGalleryBundle:Default:showImage }
+
 AzgilGalleryBundle_gallery:
     resource: "@AzgilGalleryBundle/Resources/config/routing/picture.yml"
     prefix:   /picture
