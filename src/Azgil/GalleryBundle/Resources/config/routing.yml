@@ -4,4 +4,4 @@ azgil_gallery_homepage:
 
 AzgilGalleryBundle_gallery:
     resource: "@AzgilGalleryBundle/Resources/config/routing/picture.yml"
-    prefix:   /gallery
+    prefix:   /picture

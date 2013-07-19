@@ -14,6 +14,10 @@
                 <td>{{ entity.title }}</td>
             </tr>
             <tr>
+                <th>Path</th>
+                <td>{{ entity.path }}</td>
+            </tr>
+            <tr>
                 <th>Creationdate</th>
                 <td>{{ entity.creationDate }}</td>
             </tr>
@@ -26,17 +30,17 @@
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('gallery') }}">
+        <a href="{{ path('picture') }}">
             Back to the list
         </a>
     </li>
     <li>
-        <a href="{{ path('gallery_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('picture_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>
     <li>
-        <form action="{{ path('gallery_delete', { 'id': entity.id }) }}" method="post">
+        <form action="{{ path('picture_delete', { 'id': entity.id }) }}" method="post">
             <input type="hidden" name="_method" value="DELETE" />
             {{ form_widget(delete_form) }}
             <button type="submit">Delete</button>

@@ -1,6 +1,6 @@
 azgil_gallery:
     resource: "@AzgilGalleryBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /gallery
 
 azgil_category:
     resource: "@AzgilCategoryBundle/Resources/config/routing.yml"

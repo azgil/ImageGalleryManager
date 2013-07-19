@@ -12,6 +12,7 @@ class PictureType extends AbstractType
     {
         $builder
             ->add('title')
+            ->add('path')
             ->add('creationDate')
             ->add('createdBy')
         ;

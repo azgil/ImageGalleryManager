@@ -44,7 +44,7 @@ class PictureController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('gallery_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('picture_show', array('id' => $entity->getId())));
         }
 
         return $this->render('AzgilGalleryBundle:Picture:new.html.twig', array(
@@ -135,7 +135,7 @@ class PictureController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('gallery_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('picture_edit', array('id' => $id)));
         }
 
         return $this->render('AzgilGalleryBundle:Picture:edit.html.twig', array(
@@ -165,7 +165,7 @@ class PictureController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('gallery'));
+        return $this->redirect($this->generateUrl('picture'));
     }
 
     /**

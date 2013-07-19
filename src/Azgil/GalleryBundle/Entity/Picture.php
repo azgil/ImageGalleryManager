@@ -24,21 +24,28 @@ class Picture
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
     private $title;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="path", type="string", length=255, nullable=true)
+     */
+    private $path;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="creation_date", type="string", length=10)
+     * @ORM\Column(name="creation_date", type="string", length=10, nullable=true)
      */
     private $creationDate;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="created_by", type="integer")
+     * @ORM\Column(name="created_by", type="integer", nullable=true)
      */
     private $createdBy;
 
@@ -120,5 +127,28 @@ class Picture
     public function getCreatedBy()
     {
         return $this->createdBy;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Picture
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
     }
 }
