@@ -1,5 +1,7 @@
+{% extends '::base.html.twig' %}
 
-
-Hello {{ name }}!
-<img src="/images/560770_555526657796674_894003962_n.jpg" />
-a
+{% block body %}
+    {% for picture in entities %}
+        {{ include('AzgilGalleryBundle:Default:imagerenderer.html.twig') }}
+    {% endfor %}
+{% endblock %}
