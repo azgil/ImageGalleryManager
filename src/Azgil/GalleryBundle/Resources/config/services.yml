@@ -1,0 +1,7 @@
+parameters:
+#    azgil_gallery.example.class: Azgil\GalleryBundle\Example
+
+services:
+#    azgil_gallery.example:
+#        class: %azgil_gallery.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
