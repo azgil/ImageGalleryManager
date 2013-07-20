@@ -1,3 +1,0 @@
-azgil_file_uplode_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: AzgilFileUplodeBundle:Default:index }

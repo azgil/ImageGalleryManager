@@ -1,7 +1,3 @@
-azgil_file_uplode:
-    resource: "@AzgilFileUplodeBundle/Resources/config/routing.yml"
-    prefix:   /
-
 azgil_gallery:
     resource: "@AzgilGalleryBundle/Resources/config/routing.yml"
     prefix:   /gallery

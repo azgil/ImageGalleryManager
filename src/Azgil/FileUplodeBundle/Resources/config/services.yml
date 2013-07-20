@@ -1,7 +1,0 @@
-parameters:
-#    azgil_file_uplode.example.class: Azgil\FileUplodeBundle\Example
-
-services:
-#    azgil_file_uplode.example:
-#        class: %azgil_file_uplode.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

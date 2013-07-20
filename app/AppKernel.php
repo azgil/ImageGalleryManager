@@ -18,7 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Azgil\CategoryBundle\AzgilCategoryBundle(),
             new Azgil\GalleryBundle\AzgilGalleryBundle(),
-            new Azgil\FileUplodeBundle\AzgilFileUplodeBundle(),
+            new PunkAve\FileUploaderBundle\PunkAveFileUploaderBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
