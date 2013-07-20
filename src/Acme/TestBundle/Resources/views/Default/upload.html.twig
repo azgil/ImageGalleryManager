@@ -1,0 +1,28 @@
+{% extends '::base.html.twig' %}
+
+{% block meta %}
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block javascript %}
+  <script src="{{ asset('js/jquery.js') }}"></script>
+  <script src="{{ asset('js/jquery-ui-1.8.22.js') }}"></script>
+  <script src="{{ asset('js/underscore.js') }}"></script>
+  <script src="{{ asset('bundles/punkavefileuploader/js/jquery.fileupload.js') }}"></script>
+  <script src="{{ asset('bundles/punkavefileuploader/js/FileUploader.js') }}"></script>
+  
+{% endblock %}
+
+{% block body %}
+  
+  {# Underscore templates for the uploader #}
+  {% include "PunkAveFileUploaderBundle:Default:templates.html.twig" %}
+
+  
+  {% block javascripts %}
+  {% endblock %}
+
+{% endblock %}

@@ -1,3 +1,15 @@
-acme_test_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: AcmeTestBundle:Default:index }
+acme_test_upload:
+    pattern:  /
+    defaults: { _controller: AcmeTestBundle:Upload:index }
+
+acme_test_upload_edit:
+    pattern:  /edit
+    defaults: { _controller: AcmeTestBundle:Upload:edit }
+
+acme_test_upload_upload:
+    pattern:  /upload
+    defaults: { _controller: AcmeTestBundle:Upload:upload }
+    
+acme_test_upload_delete:
+    pattern:  /delete
+    defaults: { _controller: AcmeTestBundle:Upload:delete }

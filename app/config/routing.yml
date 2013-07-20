@@ -1,6 +1,6 @@
 acme_test:
     resource: "@AcmeTestBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /test
 
 azgil_gallery:
     resource: "@AzgilGalleryBundle/Resources/config/routing.yml"
