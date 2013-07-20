@@ -39,6 +39,7 @@
     </div>
     <!-- End SlidesJS Required: Start Slides -->
 
+<<<<<<< HEAD
     {% block javascripts %}
       <!-- SlidesJS Required: Initialize SlidesJS with a jQuery doc ready -->
       <script>
@@ -58,4 +59,30 @@
       <!-- End SlidesJS Required -->
     {% endblock %}
 
+=======
+{% block javascripts %}
+  <!-- SlidesJS Required: Initialize SlidesJS with a jQuery doc ready -->
+  <script>
+    $(function() {
+      $('#slides').slidesjs({
+        width: 940,
+        height: 528,
+        play: {
+          active: true,
+          auto: false,
+          interval: 4000,
+          swap: true
+        }
+      });
+    });
+  </script>
+  <!-- End SlidesJS Required -->
+{% endblock %}
+
+
+
+
+        <br/><br/><br/><br/><br/><br/><br/>
+
+>>>>>>> f9388fc142fb4e3833a47c09b035676ee1e09342
 {% endblock %}
