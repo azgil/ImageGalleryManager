@@ -39,23 +39,23 @@
     </div>
     <!-- End SlidesJS Required: Start Slides -->
 
-    {% block javascripts %}
-      <!-- SlidesJS Required: Initialize SlidesJS with a jQuery doc ready -->
-      <script>
-        $(function() {
-          $('#slides').slidesjs({
-            width: 940,
-            height: 528,
-            play: {
-              active: true,
-              auto: false,
-              interval: 4000,
-              swap: true
-            }
-          });
+  {% block javascripts %}
+    <!-- SlidesJS Required: Initialize SlidesJS with a jQuery doc ready -->
+    <script>
+      $(function() {
+        $('#slides').slidesjs({
+          width: 940,
+          height: 528,
+          play: {
+            active: true,
+            auto: false,
+            interval: 4000,
+            swap: true
+          }
         });
-      </script>
-      <!-- End SlidesJS Required -->
-    {% endblock %}
+      });
+    </script>
+    <!-- End SlidesJS Required -->
+  {% endblock %}
 
 {% endblock %}
