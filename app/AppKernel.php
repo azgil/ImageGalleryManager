@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Azgil\CategoryBundle\AzgilCategoryBundle(),
             new Azgil\GalleryBundle\AzgilGalleryBundle(),
             new PunkAve\FileUploaderBundle\PunkAveFileUploaderBundle(),
+            new Acme\TestBundle\AcmeTestBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
