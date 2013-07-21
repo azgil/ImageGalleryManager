@@ -27,19 +27,26 @@
     {% endif %}
 
 </form>
+  <script type="text/javascript">
 
-<script type="text/javascript">
+  // Enable the file uploader
 
-// Enable the file uploader
-
-$(function() {
-    new PunkAveFileUploader({ 
-        'uploadUrl': {{ path('acme_test_upload_upload', { editId: editId }) | json_encode | raw }},
-        'viewUrl': "{{ '/uploads/tmp/attachments/' ~ editId | json_encode | raw }}",
-        'el': '.file-uploader',
-        'existingFiles': {{ existingFiles | json_encode | raw }},
-        'delaySubmitWhileUploading': '.edit-form'
-    });
-});
-</script>
+  $(function() {
+      new PunkAveFileUploader({ 
+          'uploadUrl': {{ path('acme_test_upload_upload', { editId: editId }) | json_encode | raw }},
+          {% set vUrl = '/uploads/tmp/attachments/'~editId %}
+          'viewUrl': {{ vUrl | json_encode | raw}},
+          'el': '.file-uploader',
+          'existingFiles': {{ existingFiles | json_encode | raw }},
+          'delaySubmitWhileUploading': '.edit-form'
+      });
+  });
+  </script>
+  
+  <di>
+    existingFiles: {{ existingFiles | json_encode | raw }}
+    <br/>
+    Files: {{ files | json_encode | raw }}
+  </di>
+  
 {% endblock %}

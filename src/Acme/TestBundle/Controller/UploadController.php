@@ -17,6 +17,8 @@ class UploadController extends Controller {
         $task = new Task();
         $task->setDueDate(new \DateTime('tomorrow'));
         $form = $this->createFormBuilder($task)->getForm();
+                //->add('task', 'text')
+                //->add('dueDate', 'date')
         
         $request = $this->getRequest();
 
@@ -32,6 +34,7 @@ class UploadController extends Controller {
         }
 
         $existingFiles = $this->get('punk_ave.file_uploader')->getFiles(array('folder' => 'tmp/attachments/' . $editId));
+        
 
         $fileUploader = $this->get('punk_ave.file_uploader');
         $fileUploader->syncFiles(
@@ -47,8 +50,9 @@ class UploadController extends Controller {
                     'editId' => $editId,
                     'form' => $form->createView(),
                     'isNew' => TRUE,
-                    'cancel' => 'http://www.bing.com/',
-                    'existingFiles' => $existingFiles));
+                    'cancel' => 'http://amoosibiloo.com/app_dev.php/testupload/edit',
+                    'existingFiles' => $existingFiles,
+                    'files' => $files));
         
     }
 
@@ -62,7 +66,8 @@ class UploadController extends Controller {
     }
     
     public function deleteAction(){
-        $this->get('punk_ave.file_uploader')->removeFiles(array('folder' => 'attachments/' . $posting->getId()));
+        $id = $this->getRequest()->get('id');
+        $this->get('punk_ave.file_uploader')->removeFiles(array('folder' => 'attachments/' . $id));
     }
 
 }
