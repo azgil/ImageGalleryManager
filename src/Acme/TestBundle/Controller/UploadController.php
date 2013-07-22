@@ -17,9 +17,9 @@ class UploadController extends Controller {
         $task = new Task();
         $task->setDueDate(new \DateTime('tomorrow'));
         $form = $this->createFormBuilder($task)->getForm();
-                //->add('task', 'text')
-                //->add('dueDate', 'date')
-        
+        //->add('task', 'text')
+        //->add('dueDate', 'date')
+
         $request = $this->getRequest();
 
         $editId = $request->get('editId');
@@ -34,7 +34,7 @@ class UploadController extends Controller {
         }
 
         $existingFiles = $this->get('punk_ave.file_uploader')->getFiles(array('folder' => 'tmp/attachments/' . $editId));
-        
+
 
         $fileUploader = $this->get('punk_ave.file_uploader');
         $fileUploader->syncFiles(
@@ -42,18 +42,23 @@ class UploadController extends Controller {
                     'to_folder' => '/attachments/' . $posting->getId(),
                     'remove_from_folder' => true,
                     'create_to_folder' => true));
-        
+
         $files = $fileUploader->getFiles(array('folder' => 'attachments/' . $posting->getId()));
-        
+
+        if ($files) {
+            $isNew = FALSE;
+        } else {
+            $isNew = TRUE;
+        }
+
         return $this->render('AcmeTestBundle:Default:edit.html.twig', array('name' => 'shayan karami',
                     'posting' => $posting,
                     'editId' => $editId,
                     'form' => $form->createView(),
-                    'isNew' => TRUE,
+                    'isNew' => $isNew,
                     'cancel' => 'http://amoosibiloo.com/app_dev.php/testupload/edit',
                     'existingFiles' => $existingFiles,
                     'files' => $files));
-        
     }
 
     public function uploadAction() {
@@ -64,10 +69,17 @@ class UploadController extends Controller {
 
         $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'tmp/attachments/' . $editId));
     }
-    
-    public function deleteAction(){
+
+    public function cancleAction() {
+        $editId = $this->getRequest()->get('editId');
+        $this->get('punk_ave.file_uploader')->removeFiles(array('folder' => 'tmp/attachments/' . $editId));
+        return $this->redirect($this->generateUrl('acme_test_upload_edit'));
+    }
+
+    public function deleteAction() {
         $id = $this->getRequest()->get('id');
         $this->get('punk_ave.file_uploader')->removeFiles(array('folder' => 'attachments/' . $id));
+        return $this->redirect($this->generateUrl('acme_test_upload_edit'));
     }
 
 }

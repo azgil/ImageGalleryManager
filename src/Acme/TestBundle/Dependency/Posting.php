@@ -18,7 +18,7 @@ class Posting
     
     public function __construct() {
         
-        $this->setId(147147);
+        $this->setId(987987);
     }
 
         public function getId()

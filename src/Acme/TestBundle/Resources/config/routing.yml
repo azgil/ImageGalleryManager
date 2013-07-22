@@ -9,6 +9,10 @@ acme_test_upload_edit:
 acme_test_upload_upload:
     pattern:  /upload
     defaults: { _controller: AcmeTestBundle:Upload:upload }
+
+acme_test_upload_cancle:
+    pattern:  /cancle
+    defaults: { _controller: AcmeTestBundle:Upload:cancle }
     
 acme_test_upload_delete:
     pattern:  /delete

@@ -1,12 +1,30 @@
 {% extends "::base.html.twig" %}
 
+{% block stylesheets %}
+  <style>
+    .icon-download {
+        margin-bottom: -4px;
+    }
+    .icon-trash {
+        margin-bottom: -4px;
+    }
+    .caption {
+        padding-bottom: 10px;
+    }
+    .thumbnail {
+        text-decoration: none;
+        list-style: none;
+    }
+  </style>
+{% endblock %}
+
 {% block javascript %}
-  <script src="{{ asset('js/jquery.js') }}"></script>
-  <script src="{{ asset('js/jquery-ui-1.8.22.js') }}"></script>
-  <script src="{{ asset('js/underscore.js') }}"></script>
-  <script src="{{ asset('bundles/punkavefileuploader/js/jquery.fileupload.js') }}"></script>
-  <script src="{{ asset('bundles/punkavefileuploader/js/FileUploader.js') }}"></script>
-  
+<script src="{{ asset('js/jquery.js') }}"></script>
+<script src="{{ asset('js/jquery-ui-1.8.22.js') }}"></script>
+<script src="{{ asset('js/underscore.js') }}"></script>
+<script src="{{ asset('bundles/punkavefileuploader/js/jquery.fileupload.js') }}"></script>
+<script src="{{ asset('bundles/punkavefileuploader/js/FileUploader.js') }}"></script>
+
 {% endblock %}
 
 {% block body %}
@@ -18,35 +36,36 @@
     {{ form_widget(form) }}
 
     {# Hydrated by javascript #}
-    <div class="file-uploader"></div>
+        <div class="file-uploader"></div>
 
-    <button class="btn btn-primary" type="submit">{{ isNew ? "Save New Listing" : "Save Changes" }}</button> 
-    <a class="btn" href="{{ cancel }}">Cancel</a>
+        <button class="btn btn-primary" type="submit">{{ isNew ? "Save New Listing" : "Save Changes" }}</button> 
+        <a class="btn" href="{{ path('acme_test_upload_cancle', { editId: editId }) }}">Cancel</a>
     {% if not isNew %}
         <a class="btn btn-danger" href="{{ path('acme_test_upload_delete', { id: posting.id } ) }}">Delete</a>
     {% endif %}
 
-</form>
-  <script type="text/javascript">
+    </form>
+    <script type="text/javascript">
 
-  // Enable the file uploader
+    // Enable the file uploader
 
-  $(function() {
-      new PunkAveFileUploader({ 
-          'uploadUrl': {{ path('acme_test_upload_upload', { editId: editId }) | json_encode | raw }},
-          {% set vUrl = '/uploads/tmp/attachments/'~editId %}
-          'viewUrl': {{ vUrl | json_encode | raw}},
-          'el': '.file-uploader',
-          'existingFiles': {{ existingFiles | json_encode | raw }},
-          'delaySubmitWhileUploading': '.edit-form'
-      });
-  });
-  </script>
-  
-  <di>
-    existingFiles: {{ existingFiles | json_encode | raw }}
-    <br/>
-    Files: {{ files | json_encode | raw }}
-  </di>
-  
+    $(function() {
+        new PunkAveFileUploader({ 
+            'uploadUrl': {{ path('acme_test_upload_upload', { editId: editId }) | json_encode | raw }},
+            {% set viewUrl = '/uploads/tmp/attachments/'~editId %}
+            'viewUrl': {{ viewUrl | json_encode | raw}},
+            'el': '.file-uploader',
+            'existingFiles': {{ existingFiles | json_encode | raw }},
+            'delaySubmitWhileUploading': '.edit-form'
+        });
+    });
+        </script>
+
+        <di>
+            <br/><br/>
+            existingFiles: {{ existingFiles | json_encode | raw }}
+            <br/>
+            Files: {{ files | json_encode | raw }}
+        </di>
+
 {% endblock %}
