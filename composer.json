@@ -11,6 +11,11 @@
             "type": "git",
             "url": "https://github.com/shayank/SyliusCategorizerBundle.git",
             "vendor-alias": "sylius"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/shayank/SyliusCategorizerBundle.git",
+            "vendor-alias": "punkave"
         }
     ],
     "require": {

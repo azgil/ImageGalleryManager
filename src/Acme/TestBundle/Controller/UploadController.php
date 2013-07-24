@@ -38,25 +38,17 @@ class UploadController extends Controller {
         $editId = $request->get('editId');
         if (!preg_match('/^\d+$/', $editId)) {
             $editId = sprintf('%09d', mt_rand(0, 1999999999));
-            if ($posting->getId()) {
-                $this->get('punk_ave.file_uploader')->syncFiles(
-                        array('from_folder' => 'attachments/' . $posting->getId(),
-                            'to_folder' => 'tmp/attachments/' . $editId,
-                            'create_to_folder' => true));
-            }
         }
 
-        $existingFiles = $this->get('punk_ave.file_uploader')->getFiles(array('folder' => 'tmp/attachments/' . $editId));
-
-
         $fileUploader = $this->get('punk_ave.file_uploader');
-        $fileUploader->syncFiles(
+        $fileUploader->mySyncFiles(
                 array('from_folder' => '/tmp/attachments/' . $editId,
                     'to_folder' => '/attachments/' . $posting->getId(),
                     'remove_from_folder' => true,
                     'create_to_folder' => true));
 
         $files = $fileUploader->getFiles(array('folder' => 'attachments/' . $posting->getId()));
+        $existingFiles = $this->get('punk_ave.file_uploader')->getFiles(array('folder' => 'tmp/attachments/' . $editId));
 
         if ($files) {
             $isNew = FALSE;
@@ -68,8 +60,7 @@ class UploadController extends Controller {
                     'posting' => $posting,
                     'editId' => $editId,
                     'form' => $form->createView(),
-
-            'isNew' => $isNew,
+                    'isNew' => $isNew,
                     'cancel' => 'http://amoosibiloo.com/app_dev.php/testupload/edit',
                     'existingFiles' => $existingFiles,
                     'files' => $files));
