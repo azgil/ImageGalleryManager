@@ -61,7 +61,7 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport:  %mailer_transport%
-    encryption: %%mailer_encryption
+    encryption: %mailer_encryption%
     auth_mode:  %mailer_auth_mode%
     host:       %mailer_host%
     username:   %mailer_user%
@@ -87,3 +87,6 @@ fos_user:
                 address:        resetting@amoosibiloo.com
                 sender_name:    amoosibiloo
 
+#sylius-categorizer Configuration
+sylius_categorizer:
+    driver: doctrine/orm
