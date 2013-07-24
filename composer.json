@@ -14,7 +14,7 @@
         },
         {
             "type": "git",
-            "url": "https://github.com/shayank/SyliusCategorizerBundle.git",
+            "url": "https://github.com/shayank/symfony2-file-uploader-bundle.git",
             "vendor-alias": "punkave"
         }
     ],
