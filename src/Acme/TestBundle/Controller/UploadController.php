@@ -9,6 +9,19 @@ use Acme\TestBundle\Dependency\Posting;
 class UploadController extends Controller {
 
     public function indexAction() {
+        $name = 'omid';
+        $message = \Swift_Message::newInstance()
+        ->setSubject('swiff maillero ra endakhtam')
+        ->setFrom('send@example.com')
+        ->setTo('omid.shj@gmail.com')
+        ->setBody(
+            $this->renderView(
+                'AcmeTestBundle:Default:index.txt.twig',
+                array('name' => $name)
+            )
+        )
+    ;
+    $this->get('mailer')->send($message);
         return $this->render('AcmeTestBundle:Default:upload.html.twig', array('name' => '$name'));
     }
 
@@ -55,7 +68,8 @@ class UploadController extends Controller {
                     'posting' => $posting,
                     'editId' => $editId,
                     'form' => $form->createView(),
-                    'isNew' => $isNew,
+
+            'isNew' => $isNew,
                     'cancel' => 'http://amoosibiloo.com/app_dev.php/testupload/edit',
                     'existingFiles' => $existingFiles,
                     'files' => $files));
