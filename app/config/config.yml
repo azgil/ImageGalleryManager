@@ -89,5 +89,5 @@ fos_user:
                 sender_name:    amoosibiloo
 
 #sylius-categorizer Configuration
-sylius_categorizer:
-    driver: doctrine/orm
+#sylius_categorizer:
+#    driver: doctrine/orm

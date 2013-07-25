@@ -22,7 +22,6 @@ class AppKernel extends Kernel
             new Acme\TestBundle\AcmeTestBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Acme\UserBundle\AcmeUserBundle(),
-            new Sylius\Bundle\CategorizerBundle\SyliusCategorizerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
