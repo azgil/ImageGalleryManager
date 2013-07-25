@@ -1,0 +1,5 @@
+## YAML Template.
+---
+parameters:
+    mailer_encryption: ssl
+    mailer_auth_mode: login
