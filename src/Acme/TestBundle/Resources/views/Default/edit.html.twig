@@ -41,7 +41,7 @@
         <button class="btn btn-primary" type="submit">{{ isNew ? "Save New Listing" : "Save Changes" }}</button> 
         <a class="btn" href="{{ path('acme_test_upload_cancle', { editId: editId }) }}">Cancel</a>
     {% if not isNew %}
-        <a class="btn btn-danger" href="{{ path('acme_test_upload_delete', { id: posting.id } ) }}">Delete</a>
+        <a class="btn btn-danger" href="{{ path('acme_test_upload_delete', { files: existingFiles } ) }}">Delete</a>
     {% endif %}
 
     </form>
@@ -52,7 +52,7 @@
     $(function() {
         new PunkAveFileUploader({ 
             'uploadUrl': {{ path('acme_test_upload_upload', { editId: editId }) | json_encode | raw }},
-            {% set viewUrl = '/uploads/tmp/attachments/'~editId %}
+            {% set viewUrl = '/uploads/tmp/'~editId %}
             'viewUrl': {{ viewUrl | json_encode | raw}},
             'el': '.file-uploader',
             'existingFiles': {{ existingFiles | json_encode | raw }},
@@ -66,6 +66,8 @@
             existingFiles: {{ existingFiles | json_encode | raw }}
             <br/>
             Files: {{ files | json_encode | raw }}
+            <br/>
+            Thumb_Files: {{ thumb_files | json_encode | raw }}
         </di>
         
 

@@ -16,3 +16,4 @@ nbproject
 composer.phar
 composer.lock
 *~
+img/*
