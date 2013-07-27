@@ -3,6 +3,7 @@
 namespace Azgil\GalleryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Azgil\JalaliBundle\Services\Converter;
 
 /**
  * Picture
@@ -33,7 +34,7 @@ class Picture
      *
      * @ORM\Column(name="path", type="string", length=255, nullable=true)
      */
-    private $path;
+    private $name;
 
     /**
      * @var string
@@ -48,7 +49,30 @@ class Picture
      * @ORM\Column(name="created_by", type="integer", nullable=true)
      */
     private $createdBy;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_active", type="boolean", nullable=TRUE, options={"default":TRUE})
+     */
+    private $isActive;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="visible", type="boolean", nullable=TRUE, options={"default":TRUE})
+     */
+    private $visible;
 
+    public function __construct() {
+        $converter = new Converter();
+        $dateArray = $converter->GregorianToJalali(date('Y'), date('m'), date('d'));
+        $this->creationDate = $dateArray[0]."/".$dateArray[1]."/".$dateArray[2];
+        
+        $this->isActive = TRUE;
+        $this->visible = TRUE;
+        
+    }
 
     /**
      * Get id
@@ -128,28 +152,30 @@ class Picture
     {
         return $this->createdBy;
     }
+    
+    
 
     /**
-     * Set path
+     * Set name
      *
-     * @param string $path
+     * @param string $name
      * @return Picture
      */
-    public function setPath($path)
+    public function setName($name)
     {
-        $this->path = $path;
+        $this->name = $name;
     
         return $this;
     }
 
     /**
-     * Get path
+     * Get name
      *
      * @return string 
      */
-    public function getPath()
+    public function getName()
     {
-        return $this->path;
+        return $this->name;
     }
     
     /**
@@ -198,5 +224,51 @@ class Picture
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
         return 'uploads/img/thumbnails';
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     * @return Picture
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+    
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean 
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * Set visible
+     *
+     * @param boolean $visible
+     * @return Picture
+     */
+    public function setVisible($visible)
+    {
+        $this->visible = $visible;
+    
+        return $this;
+    }
+
+    /**
+     * Get visible
+     *
+     * @return boolean 
+     */
+    public function getVisible()
+    {
+        return $this->visible;
     }
 }

@@ -44,14 +44,24 @@ class UploadController extends Controller {
 
         if ($existingFiles) {
 
-            $em = $this->getDoctrine()->getManager();
-
-            $fileUploader = $this->get('punk_ave.file_uploader');
-            $fileUploader->mySyncFiles(
+            try {
+                $fileUploader = $this->get('punk_ave.file_uploader');
+                $fileUploader->mySyncFiles(
                     array('from_folder' => 'tmp/' . $editId,
                         'to_folder' => 'img',
                         'remove_from_folder' => true,
                         'create_to_folder' => true));
+
+            $em = $this->getDoctrine()->getManager();
+            foreach ($existingFiles as $file) {
+                
+            }
+                
+            } catch (Exception $exc) {
+                echo $exc->getTraceAsString();
+            }
+
+            
             //commit
             //$em->flush();
             $isNew = FALSE;
@@ -101,7 +111,7 @@ class UploadController extends Controller {
             $this->get('punk_ave.file_uploader')->handleFileUpload(array('folder' => 'tmp/' . $editId,
                 'new_name' => $new_name));
         } catch (Exception $exc) {
-            $UploadedTmpFiles->setIsActive(FALSE);
+            $UploadedTmpFiles->setSuccess(FALSE);
             $em->persist($UploadedTmpFiles);
             $em->flush();
             echo $exc->getTraceAsString();

@@ -1,3 +1,7 @@
+azgil_jalali:
+    resource: "@AzgilJalaliBundle/Resources/config/routing.yml"
+    prefix:   /jalali
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
