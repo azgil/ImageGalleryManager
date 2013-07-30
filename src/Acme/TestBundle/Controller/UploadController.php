@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Acme\TestBundle\Dependency\Task;
 use Acme\TestBundle\Dependency\Posting;
 use PunkAve\FileUploaderBundle\Entity\UploadedTmpFiles;
+use Azgil\GalleryBundle\Entity\Picture;
 
 class UploadController extends Controller {
 
@@ -47,21 +48,24 @@ class UploadController extends Controller {
             try {
                 $fileUploader = $this->get('punk_ave.file_uploader');
                 $fileUploader->mySyncFiles(
-                    array('from_folder' => 'tmp/' . $editId,
-                        'to_folder' => 'img',
-                        'remove_from_folder' => true,
-                        'create_to_folder' => true));
+                        array('from_folder' => 'tmp/' . $editId,
+                            'to_folder' => 'img',
+                            'remove_from_folder' => true,
+                            'create_to_folder' => true));
 
-            $em = $this->getDoctrine()->getManager();
-            foreach ($existingFiles as $file) {
-                
-            }
-                
+                $em = $this->getDoctrine()->getManager();
+                foreach ($existingFiles as $file) {
+                    $picture = new Picture();
+                    $picture->setName($file);
+                    $em->persist($picture);
+                }
+
+                $em->flush();
             } catch (Exception $exc) {
                 echo $exc->getTraceAsString();
             }
 
-            
+
             //commit
             //$em->flush();
             $isNew = FALSE;
@@ -126,6 +130,18 @@ class UploadController extends Controller {
 
     public function deleteAction() {
         $files = $this->getRequest()->get('files');
+        $em = $this->getDoctrine()->getManager();
+        foreach ($files as $file) {
+            $picture = $em->getRepository('AzgilGalleryBundle:Picture')->findOneByName($file);
+            if (!$picture) {
+                throw $this->createNotFoundException(
+                        'No product found for name ' . $file
+                );
+            }
+            $picture->setIsActive(FALSE);
+            $picture->setVisible(FALSE);
+            $em->flush();
+        }
         $this->get('punk_ave.file_uploader')->removeFiles(array('folder' => 'img/thumbnails', 'files' => $files));
         $this->get('punk_ave.file_uploader')->removeFiles(array('folder' => '../../img/originals', 'files' => $files));
         return $this->redirect($this->generateUrl('acme_test_upload_edit'));

@@ -1,0 +1,11 @@
+parameters:
+#    azgil_jalali.example.class: Azgil\JalaliBundle\Example
+    azgil_jalali.converter.class : Azgil\JalaliBundle\Services\Converter
+
+services:
+#    azgil_jalali.example:
+#        class: %azgil_jalali.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+    
+    azgil_jalali.converter:
+        class: %azgil_jalali.converter.class%

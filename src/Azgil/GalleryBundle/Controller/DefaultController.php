@@ -14,9 +14,21 @@ class DefaultController extends Controller
     public function showImageAction(){
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AzgilGalleryBundle:Picture')->findAll();
+        $entities = $em->getRepository('AzgilGalleryBundle:Picture')->findBy(array('isActive' => TRUE, 'visible' => TRUE)
+                                                                      );
 
         return $this->render('AzgilGalleryBundle:Default:showimage.html.twig', array(
+            'entities' => $entities,
+        ));
+    }
+    
+    public function caroufredselAction(){
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('AzgilGalleryBundle:Picture')->findBy(array('isActive' => TRUE, 'visible' => TRUE)
+                                                                      );
+
+        return $this->render('AzgilGalleryBundle:Default:caroufredsel.html.twig', array(
             'entities' => $entities,
         ));
     }

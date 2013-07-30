@@ -1,0 +1,21 @@
+/* 
+    Document   : style
+    Created on : Jul 30, 2013, 4:42:05 PM
+    Author     : shayan
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body {
+    text-align: center;
+}
+
+#container {
+    text-align: left;
+    width: 800px;
+    margin: 0 auto;
+}
+
+#content {
+    width: 400px;
+}

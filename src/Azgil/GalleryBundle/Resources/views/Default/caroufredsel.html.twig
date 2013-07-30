@@ -1,0 +1,76 @@
+{% extends '::base.html.twig' %}
+
+{% block meta %}
+{% endblock %}
+
+{% block stylesheets %}
+<link href="{{ asset('bundles/azgilgallery/css/caroufredsel.css') }}" type="text/css" rel="stylesheet" />
+<link href="{{ asset('bundles/azgilgallery/css/style.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascript %}
+<!-- SlidesJS Required: Link to jQuery -->
+<script src="{{ asset('js/jquery.js') }}"></script>
+<!-- End SlidesJS Required -->
+
+<!-- SlidesJS Required: Link to jquery.slides.js -->
+<script src="{{ asset('bundles/azgilgallery/js/jquery.carouFredSel.min.js') }}"></script>
+<!--<script src="{{ asset('bundles/azgilgallery/js/helper-plugins/jquery.ba-throttle-debounce.min.js') }}"></script>
+<script src="{{ asset('bundles/azgilgallery/js/helper-plugins/jquery.mousewheel.min.js') }}"></script>
+<script src="{{ asset('bundles/azgilgallery/js/helper-plugins/jquery.transit.min.js') }}"></script>-->
+<script src="{{ asset('bundles/azgilgallery/js/helper-plugins/jquery.touchSwipe.min.js') }}"></script>
+<!-- End SlidesJS Required -->
+{% endblock %}
+
+{% block body %}
+<div id="container">
+    <!-- SlidesJS Required: Start Slides -->
+    <!-- The container is used to define the width of the slideshow -->
+    <div id="content">
+        <div class="image_carousel">
+            <div id="caroufredsel_wrapper">
+            {% for picture in entities %}
+              {{ include('AzgilGalleryBundle:Default:imagerenderer.html.twig') }}
+            {% endfor %}
+            </div>
+            <div class="clearfix"></div>
+                <a class="prev" id="foo2_prev" href="#"><span>prev</span></a>
+                <a class="next" id="foo2_next" href="#"><span>next</span></a>
+                <div class="pagination" id="foo2_pag"></div>
+            </div>
+            <!-- End SlidesJS Required: Start Slides -->
+
+            <!-- SlidesJS Required: Initialize SlidesJS with a jQuery doc ready -->
+            <script type="text/javascript">
+                $("#caroufredsel_wrapper").carouFredSel({
+                    circular: false,
+                    infinite: false,
+                    auto    : false,
+                    prev    : {
+                        button  : "#foo2_prev",
+                        key     : "left"
+                    },
+                    next    : {
+                        button  : "#foo2_next",
+                        key     : "right"
+                    },
+                    pagination  : "#foo2_pag",
+                    scroll : {
+                        fx: "scroll",
+                        easing: "swing"
+                    },
+                    swipe : {
+                        onTouch: true,
+                        onMouse: true
+                    },
+                    align: "center"
+
+                });
+            </script>
+            <!-- End SlidesJS Required -->
+  {% block javascripts %}
+
+  {% endblock %}
+    </div>
+</div>
+{% endblock %}

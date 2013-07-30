@@ -67,10 +67,10 @@ class Picture
     public function __construct() {
         $converter = new Converter();
         $dateArray = $converter->GregorianToJalali(date('Y'), date('m'), date('d'));
-        $this->creationDate = $dateArray[0]."/".$dateArray[1]."/".$dateArray[2];
+        $this->setCreationDate($dateArray[0]."/".$dateArray[1]."/".$dateArray[2]);
         
-        $this->isActive = TRUE;
-        $this->visible = TRUE;
+        $this->setIsActive(TRUE);
+        $this->setVisible(TRUE);
         
     }
 
@@ -105,6 +105,29 @@ class Picture
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Picture
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -153,79 +176,6 @@ class Picture
         return $this->createdBy;
     }
     
-    
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return Picture
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-    
-    /**
-     * Get absolute path
-     *
-     * @return string 
-     */
-    public function getAbsolutePath()
-    {
-        return null === $this->path
-            ? null
-            : $this->getUploadRootDir().'/'.$this->path;
-    }
-    
-    /**
-     * Get web path
-     *
-     * @return string 
-     */
-    public function getWebPath()
-    {
-        return null === $this->path
-            ? null
-            : $this->getUploadDir().'/'.$this->path;
-    }
-    
-    /**
-     * Get upload root dir
-     *
-     * @return string 
-     */
-    protected function getUploadRootDir()
-    {
-        // the absolute directory path where uploaded
-        // documents should be saved
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
-    }
-
-    /**
-     * Get upload dir
-     *
-     * @return string 
-     */
-    protected function getUploadDir()
-    {
-        // get rid of the __DIR__ so it doesn't screw up
-        // when displaying uploaded doc/image in the view.
-        return 'uploads/img/thumbnails';
-    }
-
     /**
      * Set isActive
      *
@@ -271,4 +221,77 @@ class Picture
     {
         return $this->visible;
     }
+    
+    /**
+     * Get absolute path
+     *
+     * @return string 
+     */
+    public function getAbsolutePath()
+    {
+        return null === $this->getName()
+            ? null
+            : $this->getUploadRootDir().'/'.$this->getName();
+    }
+    
+    /**
+     * Get web path
+     *
+     * @return string 
+     */
+    public function getWebPath()
+    {
+        return null === $this->getName()
+            ? null
+            : $this->getUploadDir().'/'.$this->getName();
+    }
+    
+    /**
+     * Get upload root dir
+     *
+     * @return string 
+     */
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    /**
+     * Get upload dir
+     *
+     * @return string 
+     */
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads/img/thumbnails';
+    }
+    
+    /**
+     * Get originals absolute path
+     *
+     * @return string 
+     */
+    public function getOriginalsAbsolutePath()
+    {
+        return null === $this->getName()
+            ? null
+            : $this->getOriginalsUploadRootDir().'/'.$this->getName();
+    }
+    
+    /**
+     * Get originals upload root dir
+     *
+     * @return string 
+     */
+    protected function getOriginalsUploadRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../../img/originals';
+    }
+    
 }

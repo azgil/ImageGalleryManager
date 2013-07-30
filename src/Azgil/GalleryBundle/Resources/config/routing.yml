@@ -9,3 +9,7 @@ azgil_gallery_showimageaction:
 AzgilGalleryBundle_gallery:
     resource: "@AzgilGalleryBundle/Resources/config/routing/picture.yml"
     prefix:   /picture
+
+azgil_gallery_caroufredsel:
+    pattern: /caroufredsel
+    defaults: { _controller: AzgilGalleryBundle:Default:caroufredsel }
