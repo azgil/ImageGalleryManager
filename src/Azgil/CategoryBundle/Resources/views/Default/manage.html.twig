@@ -1,1 +1,80 @@
-{{ tree | raw }}
+<html>
+<head>
+	<script src="{{ asset('js/jquery.js') }}"  type="text/javascript"></script>
+	<script src="{{ asset('js/ui/jquery-ui.min.js') }}"  type="text/javascript"></script>
+    <link href="{{ asset('bundles/azgilcategory/css/stylesheet.css') }}" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+    	.sorrt {
+    		width: 150px;
+    	}
+		tree li, nodes li{
+			width: 150px;
+			background-color: lightGray;
+			border: solid thin black  ;
+			padding-top: 10px;
+			padding-left: 10px;
+			font-size: small;			
+		}
+		body {
+			direction: rtl;
+		}
+    </style>
+    <script type="text/javascript">
+		$("document").ready(function(){
+			
+			$("tree ul").sortable({
+				connectWith: "tree ul",
+				revert: "true"
+			}).disableSelection();
+
+			//$( "nodes li" ).draggable({
+			//	connectToSortable: "tree ul",
+			//	helper: "clone",
+			//	revert: "invalid",
+			//	stop: function( event, ui ) {
+			//		$("tree ul").sortable({
+			//			connectWith: "tree ul",
+			//			revert: "true"
+			//		}).disableSelection();
+			//		alert('dd');
+			//	}
+			//});
+			
+			$("nodes ul").sortable({
+				helper: "clone",
+				connectWith: "tree ul",
+				revert: "true",
+					remove: function(event, ui) {
+		                ui.item.clone().appendTo(this);
+		                //$(this).sortable('cancel');
+					}
+			}).disableSelection();
+			
+			$("#searchNodes").keyup(function() {
+				alert($(this).val());
+			});
+		});
+
+		
+		
+    </script>
+</head>
+<body>
+	<tree>
+		{{ tree | raw }}
+	</tree>
+	<input id="searchNodes" type="text" onkeyup ="fetchNodes();">
+	<nodes>
+	<ul>
+		{% for nodee in nodes %}
+			<li>{{ nodee.name }}
+				<ul><br>
+					
+				</ul>
+			</li>
+		{% endfor %}
+		</ul>
+	</nodes>
+</body>
+</html>
+

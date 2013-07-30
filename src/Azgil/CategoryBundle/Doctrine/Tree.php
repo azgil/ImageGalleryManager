@@ -5,23 +5,77 @@ namespace Azgil\CategoryBundle\Doctrine;
 use Doctrine\ORM\EntityManager;
 
 class Tree {
-	
+	private $em;
 	function __construct(EntityManager $em) {
 		$this->em = $em;
 	}
 	
-	public function generateXML(){
+	public function generateTree($type){		
 		$cat_table = $this->em->getRepository('AzgilCategoryBundle:CategoryTree')->findBy(
-			array('type'=> 1),array('path' => 'ASC'));
+				array('type'=> $type),array('path' => 'ASC'));
+		$result = '<ul>'."\n";
+		$prev = '-';
+		foreach ($cat_table as $tag) {
+			$prev_len = strlen($prev);
+			$current_len = strlen($tag->getPath());
+			$current_level = $current_len/4;
+			$prev_level = $prev_len/4;
+			 
+			//$result .= $prev.'_'.$tag->getPath();
+		
+			if ( $current_len > $prev_len) {
+				$result .= str_repeat("\t", $current_level).
+				'<li>'.$tag->getPath()."\n".
+				str_repeat("\t", $current_level+1).
+				'<ul><br>'."\n";
+			}
+			 
+			if ($current_len == $prev_len) {
+				$result .= str_repeat("\t", $current_level+1).
+				'</ul>'."\n".
+				str_repeat("\t", $current_level).
+				'</li>'."\n".
+				str_repeat("\t", $current_level).
+				'<li>'.$tag->getPath()."\n".
+				str_repeat("\t", $current_level+1).
+				'<ul><br>'."\n";
+			}		
+			if ( $current_len < $prev_len) {
+				for ($j = $prev_level; $j > $current_level; $j--){
+					$result .= str_repeat("\t",$j+1 ).
+					'</ul>'."\n".
+					str_repeat("\t",$j ).
+					'</li>'."\n";
+					$prev_level = $j;
+				}
+				$result .=  str_repeat("\t", $prev_level).
+				'</ul>'."\n".
+				str_repeat("\t", $current_level).
+				'</li>'."\n".
+				str_repeat("\t", $current_level).
+				'<li>'.$tag->getPath()."\n".
+				str_repeat("\t", $current_level+1).
+				'<ul><br>'."\n";		
+			}
+			$prev = $tag->getPath();
+		}		 
+		for ($j = $current_level; $j > 0; $j--){
+			$result .= str_repeat("\t",$j+1 ).
+			'</ul>'."\n".
+			str_repeat("\t",$j ).
+			'</li>'."\n";			 
+		}		 
+		$result .= '</ul>'."\n";
+		return $result;
+		
 	}
 	
-	public function treeMaker(array $table, $seek){
-		$result = '<ul>';
-		$prev = '-';
-		foreach ($table as $tag) {
-			
-		}
-		$result .= '</ul>';
+	public function getLastNodes($type){
+		
+		//return  $this->em->getRepository('AzgilCategoryBundle:CategoryNode')->findBy(
+		//		array('type'=> $type),array('name' => 'ASC')) ;
+		return $this->em->createQuery("SELECT * FROM  CategoryNode")->getResult();
+		
 	}
 }
 

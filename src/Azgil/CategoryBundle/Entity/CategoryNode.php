@@ -28,7 +28,13 @@ class CategoryNode
      */
     private $name;
 
-
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="type", type="integer")
+     */
+    private $type;
+	
     /**
      * Get id
      *
@@ -60,5 +66,28 @@ class CategoryNode
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set type
+     *
+     * @param integer $type
+     * @return CategoryNode
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return integer 
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }
