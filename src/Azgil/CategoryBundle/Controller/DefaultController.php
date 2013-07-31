@@ -41,8 +41,21 @@ class DefaultController extends Controller
     	$html = str_replace("<br>", '', $html);	
     	$tree = new \DOMDocument();
     	$tree->loadXML($html);
+        
     	foreach ($tree->getElementsByTagName('li')as $node){
     		$html .= $node->getNodePath()."<br>";
+                $path = $node->getNodePath();
+                $ids = explode('/ul/li', $path);
+                $path = '';
+                unset($ids[0]);
+                foreach ($ids as $id){                    
+                    if (!$id) {
+                        $path .= '-001';
+                    }  else {
+                        $path .= '-002';
+                    }
+                }
+                $html .= $path."<br>";
     	}
     	$response = array("code" => 100, "success"=> true, "nodes" => $html.'ss');
     	return new Response(json_encode($response));

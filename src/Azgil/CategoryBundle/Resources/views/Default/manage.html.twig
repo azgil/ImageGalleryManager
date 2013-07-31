@@ -35,19 +35,14 @@
 				//alert($("tree").html());
 				$("rrr").html('init');
 				$.post( '{{path("AzgilCategoryBundle_saveTree")}}' ,{htm:$("tree").html()},function(response){
-                    if(response.code == 100 && response.success){
-                        $("rrr").html(response.nodes);
-                    }
-                        
-                },"json");
+                                if(response.code == 100 && response.success){
+                                    $("rrr").html(response.nodes);
+                                }
+
+                            },"json");
 			});
 			
-			$("tree li").hover(function(){
-				$(this).append("<div>edit</div>");
-			}, function(){
-
-				$(this).children("div").remove();
-				});
+			
 			
 			$("tree ul").sortable({
 				connectWith: "tree ul , Nodes ul",
