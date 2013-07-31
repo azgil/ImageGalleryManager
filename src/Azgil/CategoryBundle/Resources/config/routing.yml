@@ -7,6 +7,10 @@ AzgilCategoryBundle_fetchNodes:
     pattern:  /category/fetchnodes
     defaults: { _controller: "AzgilCategoryBundle:Default:fetchNodes" }
 
+AzgilCategoryBundle_saveTree:
+    pattern:  /category/Save
+    defaults: { _controller: "AzgilCategoryBundle:Default:saveTree" }
+
 AzgilCategoryBundle_category_nodes:
     resource: "@AzgilCategoryBundle/Resources/config/routing/categorynode.yml"
     prefix:   /category/nodes

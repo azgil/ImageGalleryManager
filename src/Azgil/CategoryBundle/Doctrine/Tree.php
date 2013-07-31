@@ -13,7 +13,7 @@ class Tree {
 	public function generateTree($type){		
 		$cat_table = $this->em->getRepository('AzgilCategoryBundle:CategoryTree')->findBy(
 				array('type'=> $type),array('path' => 'ASC'));
-		$result = '<ul>'."\n";
+		$result = '<ul><br>'."\n";
 		$prev = '-';
 		foreach ($cat_table as $tag) {
 			$prev_len = strlen($prev);

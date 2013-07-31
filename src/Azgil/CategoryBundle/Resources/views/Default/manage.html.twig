@@ -18,12 +18,39 @@
 		body {
 			direction: rtl;
 		}
+		.recycle{
+			background-color: black;
+			height: 40px;
+			color: white;
+		}
+		.treeroot{
+			background-color: green;
+			height: 40px;
+		}
     </style>
     <script type="text/javascript">
 		$("document").ready(function(){
 			
+			$("#save_tree").click(function(){
+				//alert($("tree").html());
+				$("rrr").html('init');
+				$.post( '{{path("AzgilCategoryBundle_saveTree")}}' ,{htm:$("tree").html()},function(response){
+                    if(response.code == 100 && response.success){
+                        $("rrr").html(response.nodes);
+                    }
+                        
+                },"json");
+			});
+			
+			$("tree li").hover(function(){
+				$(this).append("<div>edit</div>");
+			}, function(){
+
+				$(this).children("div").remove();
+				});
+			
 			$("tree ul").sortable({
-				connectWith: "tree ul , nodes ul",
+				connectWith: "tree ul , Nodes ul",
 				revert: "true"
 			}).disableSelection();			
 			
@@ -38,10 +65,7 @@
 			}).disableSelection();
 			
 			$("#searchNodes").keyup(function() {
-				//alert('init');
-				key = $("#searchNodes").val();
 				$.post( '{{path("AzgilCategoryBundle_fetchNodes")}}' ,{key:$("#searchNodes").val()},function(response){
-					//alert('sent');
                     if(response.code == 100 && response.success){
                         $("nodes").html(response.nodes);
                         
@@ -66,8 +90,12 @@
 </head>
 <body>
 	<tree>
+		
 		{{ tree | raw }}
+		
 	</tree>
+	<input id="save_tree" type="button" value="ذخیره" />
+	<rrr></rrr>
 	<input id="searchNodes" type="text" onkeyup ="fetchNodes();">
 	<nodes>
 	<ul>

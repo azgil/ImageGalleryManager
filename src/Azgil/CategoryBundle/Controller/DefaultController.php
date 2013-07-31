@@ -5,6 +5,7 @@ namespace Azgil\CategoryBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Azgil\CategoryBundle\Doctrine\Tree;
 use Symfony\Component\HttpFoundation\Request;
+use \Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -28,7 +29,22 @@ class DefaultController extends Controller
     	$tree = new Tree($em);
     	
     	$response = array("code" => 100, "success"=> true, "nodes" => $tree->fetcNodes($key,1));
-    	return new \Symfony\Component\HttpFoundation\Response(json_encode($response));
+    	return new Response(json_encode($response));
     		
+    }
+    
+    public function saveTreeAction()
+    {
+    	$html = $this->getRequest()->request->get('htm');
+    	//$html = str_replace("<li><ul>", "<li>", $html);
+    	//$html = strip_tags($html , "<li>");
+    	$html = str_replace("<br>", '', $html);	
+    	$tree = new \DOMDocument();
+    	$tree->loadXML($html);
+    	foreach ($tree->getElementsByTagName('li')as $node){
+    		$html .= $node->getNodePath()."<br>";
+    	}
+    	$response = array("code" => 100, "success"=> true, "nodes" => $html.'ss');
+    	return new Response(json_encode($response));
     }
 }
