@@ -5,38 +5,38 @@ namespace Azgil\CategoryBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Azgil\CategoryBundle\Entity\Category;
-use Azgil\CategoryBundle\Form\CategoryType;
+use Azgil\CategoryBundle\Entity\CategoryTree;
+use Azgil\CategoryBundle\Form\CategoryTreeType;
 
 /**
- * Category controller.
+ * CategoryTree controller.
  *
  */
-class CategoryController extends Controller
+class CategoryTreeController extends Controller
 {
 
     /**
-     * Lists all Category entities.
+     * Lists all CategoryTree entities.
      *
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AzgilCategoryBundle:Category')->findAll();
+        $entities = $em->getRepository('AzgilCategoryBundle:CategoryTree')->findAll();
 
-        return $this->render('AzgilCategoryBundle:Category:index.html.twig', array(
+        return $this->render('AzgilCategoryBundle:CategoryTree:index.html.twig', array(
             'entities' => $entities,
         ));
     }
     /**
-     * Creates a new Category entity.
+     * Creates a new CategoryTree entity.
      *
      */
     public function createAction(Request $request)
     {
-        $entity  = new Category();
-        $form = $this->createForm(new CategoryType(), $entity);
+        $entity  = new CategoryTree();
+        $form = $this->createForm(new CategoryTreeType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -44,69 +44,69 @@ class CategoryController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('category_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('category_tree_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('AzgilCategoryBundle:Category:new.html.twig', array(
+        return $this->render('AzgilCategoryBundle:CategoryTree:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Displays a form to create a new Category entity.
+     * Displays a form to create a new CategoryTree entity.
      *
      */
     public function newAction()
     {
-        $entity = new Category();
-        $form   = $this->createForm(new CategoryType(), $entity);
+        $entity = new CategoryTree();
+        $form   = $this->createForm(new CategoryTreeType(), $entity);
 
-        return $this->render('AzgilCategoryBundle:Category:new.html.twig', array(
+        return $this->render('AzgilCategoryBundle:CategoryTree:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a Category entity.
+     * Finds and displays a CategoryTree entity.
      *
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AzgilCategoryBundle:Category')->find($id);
+        $entity = $em->getRepository('AzgilCategoryBundle:CategoryTree')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Category entity.');
+            throw $this->createNotFoundException('Unable to find CategoryTree entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('AzgilCategoryBundle:Category:show.html.twig', array(
+        return $this->render('AzgilCategoryBundle:CategoryTree:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),        ));
     }
 
     /**
-     * Displays a form to edit an existing Category entity.
+     * Displays a form to edit an existing CategoryTree entity.
      *
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AzgilCategoryBundle:Category')->find($id);
+        $entity = $em->getRepository('AzgilCategoryBundle:CategoryTree')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Category entity.');
+            throw $this->createNotFoundException('Unable to find CategoryTree entity.');
         }
 
-        $editForm = $this->createForm(new CategoryType(), $entity);
+        $editForm = $this->createForm(new CategoryTreeType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('AzgilCategoryBundle:Category:edit.html.twig', array(
+        return $this->render('AzgilCategoryBundle:CategoryTree:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -114,38 +114,38 @@ class CategoryController extends Controller
     }
 
     /**
-     * Edits an existing Category entity.
+     * Edits an existing CategoryTree entity.
      *
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AzgilCategoryBundle:Category')->find($id);
+        $entity = $em->getRepository('AzgilCategoryBundle:CategoryTree')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Category entity.');
+            throw $this->createNotFoundException('Unable to find CategoryTree entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new CategoryType(), $entity);
+        $editForm = $this->createForm(new CategoryTreeType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('category_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('category_tree_edit', array('id' => $id)));
         }
 
-        return $this->render('AzgilCategoryBundle:Category:edit.html.twig', array(
+        return $this->render('AzgilCategoryBundle:CategoryTree:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
     /**
-     * Deletes a Category entity.
+     * Deletes a CategoryTree entity.
      *
      */
     public function deleteAction(Request $request, $id)
@@ -155,21 +155,21 @@ class CategoryController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AzgilCategoryBundle:Category')->find($id);
+            $entity = $em->getRepository('AzgilCategoryBundle:CategoryTree')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Category entity.');
+                throw $this->createNotFoundException('Unable to find CategoryTree entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('category'));
+        return $this->redirect($this->generateUrl('category_tree'));
     }
 
     /**
-     * Creates a form to delete a Category entity by id.
+     * Creates a form to delete a CategoryTree entity by id.
      *
      * @param mixed $id The entity id
      *

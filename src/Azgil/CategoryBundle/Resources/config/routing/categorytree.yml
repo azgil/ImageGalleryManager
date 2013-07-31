@@ -1,0 +1,30 @@
+category_tree:
+    pattern:  /
+    defaults: { _controller: "AzgilCategoryBundle:CategoryTree:index" }
+
+category_tree_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AzgilCategoryBundle:CategoryTree:show" }
+
+category_tree_new:
+    pattern:  /new
+    defaults: { _controller: "AzgilCategoryBundle:CategoryTree:new" }
+
+category_tree_create:
+    pattern:  /create
+    defaults: { _controller: "AzgilCategoryBundle:CategoryTree:create" }
+    requirements: { _method: post }
+
+category_tree_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "AzgilCategoryBundle:CategoryTree:edit" }
+
+category_tree_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "AzgilCategoryBundle:CategoryTree:update" }
+    requirements: { _method: post|put }
+
+category_tree_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "AzgilCategoryBundle:CategoryTree:delete" }
+    requirements: { _method: post|delete }

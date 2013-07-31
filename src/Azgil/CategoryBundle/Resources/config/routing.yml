@@ -1,7 +1,25 @@
-azgil_category_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: AzgilCategoryBundle:Default:index }
 
-AzgilCategoryBundle_category:
-    resource: "@AzgilCategoryBundle/Resources/config/routing/category.yml"
-    prefix:   /category
+AzgilCategoryBundle_manage:
+    pattern:  /category/manage
+    defaults: { _controller: "AzgilCategoryBundle:Default:manage" }
+    
+AzgilCategoryBundle_fetchNodes:
+    pattern:  /category/fetchnodes
+    defaults: { _controller: "AzgilCategoryBundle:Default:fetchNodes" }
+
+AzgilCategoryBundle_saveTree:
+    pattern:  /category/Save
+    defaults: { _controller: "AzgilCategoryBundle:Default:saveTree" }
+
+AzgilCategoryBundle_category_nodes:
+    resource: "@AzgilCategoryBundle/Resources/config/routing/categorynode.yml"
+    prefix:   /category/nodes
+    
+AzgilCategoryBundle_category_types:
+    resource: "@AzgilCategoryBundle/Resources/config/routing/categorytype.yml"
+    prefix:   /category/types
+    
+AzgilCategoryBundle_category_tree:
+    resource: "@AzgilCategoryBundle/Resources/config/routing/categorytree.yml"
+    prefix:   /category/tree
+    

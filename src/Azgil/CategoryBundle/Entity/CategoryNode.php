@@ -5,12 +5,12 @@ namespace Azgil\CategoryBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CategoryType
+ * CategoryNode
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class CategoryType
+class CategoryNode
 {
     /**
      * @var integer
@@ -28,7 +28,13 @@ class CategoryType
      */
     private $name;
 
-
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="type", type="integer")
+     */
+    private $type;
+	
     /**
      * Get id
      *
@@ -43,7 +49,7 @@ class CategoryType
      * Set name
      *
      * @param string $name
-     * @return CategoryType
+     * @return CategoryNode
      */
     public function setName($name)
     {
@@ -60,5 +66,28 @@ class CategoryType
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set type
+     *
+     * @param integer $type
+     * @return CategoryNode
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return integer 
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

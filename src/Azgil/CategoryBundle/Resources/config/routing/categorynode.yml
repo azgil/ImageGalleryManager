@@ -1,0 +1,30 @@
+category_nodes:
+    pattern:  /
+    defaults: { _controller: "AzgilCategoryBundle:CategoryNode:index" }
+
+category_nodes_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AzgilCategoryBundle:CategoryNode:show" }
+
+category_nodes_new:
+    pattern:  /new
+    defaults: { _controller: "AzgilCategoryBundle:CategoryNode:new" }
+
+category_nodes_create:
+    pattern:  /create
+    defaults: { _controller: "AzgilCategoryBundle:CategoryNode:create" }
+    requirements: { _method: post }
+
+category_nodes_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "AzgilCategoryBundle:CategoryNode:edit" }
+
+category_nodes_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "AzgilCategoryBundle:CategoryNode:update" }
+    requirements: { _method: post|put }
+
+category_nodes_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "AzgilCategoryBundle:CategoryNode:delete" }
+    requirements: { _method: post|delete }

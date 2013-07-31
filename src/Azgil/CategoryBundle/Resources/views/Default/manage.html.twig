@@ -1,0 +1,113 @@
+<html>
+<head>
+	<script src="{{ asset('js/jquery.js') }}"  type="text/javascript"></script>
+	<script src="{{ asset('js/ui/jquery-ui.min.js') }}"  type="text/javascript"></script>
+    <link href="{{ asset('bundles/azgilcategory/css/stylesheet.css') }}" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+    	.sorrt {
+    		width: 150px;
+    	}
+		tree li, nodes li{
+			width: 150px;
+			background-color: lightGray;
+			border: solid thin black  ;
+			padding-top: 10px;
+			padding-left: 10px;
+			font-size: small;			
+		}
+		body {
+			direction: rtl;
+		}
+		.recycle{
+			background-color: black;
+			height: 40px;
+			color: white;
+		}
+		.treeroot{
+			background-color: green;
+			height: 40px;
+		}
+    </style>
+    <script type="text/javascript">
+		$("document").ready(function(){
+			
+			$("#save_tree").click(function(){
+				//alert($("tree").html());
+				$("rrr").html('init');
+				$.post( '{{path("AzgilCategoryBundle_saveTree")}}' ,{htm:$("tree").html()},function(response){
+                    if(response.code == 100 && response.success){
+                        $("rrr").html(response.nodes);
+                    }
+                        
+                },"json");
+			});
+			
+			$("tree li").hover(function(){
+				$(this).append("<div>edit</div>");
+			}, function(){
+
+				$(this).children("div").remove();
+				});
+			
+			$("tree ul").sortable({
+				connectWith: "tree ul , Nodes ul",
+				revert: "true"
+			}).disableSelection();			
+			
+			$("nodes ul").sortable({
+				helper: "clone",
+				connectWith: "tree ul",
+				revert: "true",
+					remove: function(event, ui) {
+		                ui.item.clone().appendTo(this);
+		                //$(this).sortable('cancel');
+					}
+			}).disableSelection();
+			
+			$("#searchNodes").keyup(function() {
+				$.post( '{{path("AzgilCategoryBundle_fetchNodes")}}' ,{key:$("#searchNodes").val()},function(response){
+                    if(response.code == 100 && response.success){
+                        $("nodes").html(response.nodes);
+                        
+                        $("nodes ul").sortable({
+            				helper: "clone",
+            				connectWith: "tree ul",
+            				revert: "true",
+            					remove: function(event, ui) {
+            		                ui.item.clone().appendTo(this);
+            		                //$(this).sortable('cancel');
+            					}
+            			}).disableSelection();
+                    }
+                        
+                },"json");
+			});
+		});
+
+		
+		
+    </script>
+</head>
+<body>
+	<tree>
+		
+		{{ tree | raw }}
+		
+	</tree>
+	<input id="save_tree" type="button" value="ذخیره" />
+	<rrr></rrr>
+	<input id="searchNodes" type="text" onkeyup ="fetchNodes();">
+	<nodes>
+	<ul>
+		{% for nodee in nodes %}
+			<li>{{ nodee.name }}
+				<ul><br>
+					
+				</ul>
+			</li>
+		{% endfor %}
+		</ul>
+	</nodes>
+</body>
+</html>
+

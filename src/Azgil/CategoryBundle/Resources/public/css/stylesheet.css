@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+body{
+	background-color: gray;
+}
+.tst{
+	background-color: red;
+}
+.tst2{
+	background-color: gray;
+}
