@@ -23,22 +23,9 @@
 		$("document").ready(function(){
 			
 			$("tree ul").sortable({
-				connectWith: "tree ul",
+				connectWith: "tree ul , nodes ul",
 				revert: "true"
-			}).disableSelection();
-
-			//$( "nodes li" ).draggable({
-			//	connectToSortable: "tree ul",
-			//	helper: "clone",
-			//	revert: "invalid",
-			//	stop: function( event, ui ) {
-			//		$("tree ul").sortable({
-			//			connectWith: "tree ul",
-			//			revert: "true"
-			//		}).disableSelection();
-			//		alert('dd');
-			//	}
-			//});
+			}).disableSelection();			
 			
 			$("nodes ul").sortable({
 				helper: "clone",
@@ -51,7 +38,25 @@
 			}).disableSelection();
 			
 			$("#searchNodes").keyup(function() {
-				alert($(this).val());
+				//alert('init');
+				key = $("#searchNodes").val();
+				$.post( '{{path("AzgilCategoryBundle_fetchNodes")}}' ,{key:$("#searchNodes").val()},function(response){
+					//alert('sent');
+                    if(response.code == 100 && response.success){
+                        $("nodes").html(response.nodes);
+                        
+                        $("nodes ul").sortable({
+            				helper: "clone",
+            				connectWith: "tree ul",
+            				revert: "true",
+            					remove: function(event, ui) {
+            		                ui.item.clone().appendTo(this);
+            		                //$(this).sortable('cancel');
+            					}
+            			}).disableSelection();
+                    }
+                        
+                },"json");
 			});
 		});
 

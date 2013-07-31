@@ -71,11 +71,23 @@ class Tree {
 	}
 	
 	public function getLastNodes($type){
+		return $this->em->getRepository("AzgilCategoryBundle:CategoryNode")->createQueryBuilder('node')->
+		where('node.type = :type')->setParameter('type', $type)->
+		orderBy('node.id','DESC')->getQuery()->setMaxResults(5)->getResult();
+	}
+	
+	public function fetcNodes($key,$type){
+		$nodes = $this->em->getRepository("AzgilCategoryBundle:CategoryNode")->createQueryBuilder('node')->
+		where('node.type = 1')->
+		andWhere('node.name LIKE :key ')->setParameter('key', '%'.$key.'%')->
+		orderBy('node.id','DESC')->getQuery()->setMaxResults(3)->getResult();
 		
-		//return  $this->em->getRepository('AzgilCategoryBundle:CategoryNode')->findBy(
-		//		array('type'=> $type),array('name' => 'ASC')) ;
-		return $this->em->createQuery("SELECT * FROM  CategoryNode")->getResult();
-		
+		$result = '<ul>';
+		foreach ($nodes as $node) {
+			$result .= '<li>'.$node->getName().
+			'<ul><br></ul></li>';
+		}
+		return $result.'</ul>';
 	}
 }
 

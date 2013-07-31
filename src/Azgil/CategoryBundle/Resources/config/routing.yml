@@ -2,6 +2,10 @@
 AzgilCategoryBundle_manage:
     pattern:  /category/manage
     defaults: { _controller: "AzgilCategoryBundle:Default:manage" }
+    
+AzgilCategoryBundle_fetchNodes:
+    pattern:  /category/fetchnodes
+    defaults: { _controller: "AzgilCategoryBundle:Default:fetchNodes" }
 
 AzgilCategoryBundle_category_nodes:
     resource: "@AzgilCategoryBundle/Resources/config/routing/categorynode.yml"
