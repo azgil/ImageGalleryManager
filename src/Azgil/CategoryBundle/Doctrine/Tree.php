@@ -25,7 +25,7 @@ class Tree {
 		
 			if ( $current_len > $prev_len) {
 				$result .= str_repeat("\t", $current_level).
-				'<li>'.$tag->getPath()."\n".
+				'<li id = "' . $tag->getId() . '">'.$tag->getPath()."\n".
 				str_repeat("\t", $current_level+1).
 				'<ul><br>'."\n";
 			}
@@ -36,7 +36,7 @@ class Tree {
 				str_repeat("\t", $current_level).
 				'</li>'."\n".
 				str_repeat("\t", $current_level).
-				'<li>'.$tag->getPath()."\n".
+				'<li id = "' . $tag->getId() . '">'.$tag->getPath()."\n".
 				str_repeat("\t", $current_level+1).
 				'<ul><br>'."\n";
 			}		
@@ -53,7 +53,7 @@ class Tree {
 				str_repeat("\t", $current_level).
 				'</li>'."\n".
 				str_repeat("\t", $current_level).
-				'<li>'.$tag->getPath()."\n".
+				'<li id = "' . $tag->getId() . '">'.$tag->getPath()."\n".
 				str_repeat("\t", $current_level+1).
 				'<ul><br>'."\n";		
 			}

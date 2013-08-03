@@ -46,13 +46,19 @@ class DefaultController extends Controller
     		$html .= $node->getNodePath()."<br>";
                 $path = $node->getNodePath();
                 $ids = explode('/ul/li', $path);
-                $path = '';
+                $path = 'id = ' . $node->getAttribute('id') . '   ' ;
                 unset($ids[0]);
                 foreach ($ids as $id){                    
                     if (!$id) {
                         $path .= '-001';
                     }  else {
-                        $path .= '-002';
+                    	$digit = intval( str_replace(array("[","]"), '', $id) );
+                    	if ($digit < 10) 
+                    		$path .= '-00' . $digit;
+                    	elseif ($digit < 100)
+                    		$path .= '-0' . $digit;
+                    	else 
+                        	$path .= '-' . $digit;
                     }
                 }
                 $html .= $path."<br>";

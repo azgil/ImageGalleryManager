@@ -94,8 +94,8 @@
 	<input id="searchNodes" type="text" onkeyup ="fetchNodes();">
 	<nodes>
 	<ul>
-		{% for nodee in nodes %}
-			<li>{{ nodee.name }}
+		{% for node in nodes %}
+			<li id = {{ node.id }} >{{ node.name }}
 				<ul><br>
 					
 				</ul>
