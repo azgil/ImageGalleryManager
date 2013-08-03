@@ -29,9 +29,8 @@ class CategoryTree
     private $type;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="node", type="integer")
+     * @ORM\ManyToOne(targetEntity="CategoryNode", inversedBy="trees")
+     * @ORM\JoinColumn(name="node_id", referencedColumnName="id")
      */
     private $node;
 
@@ -41,7 +40,6 @@ class CategoryTree
      * @ORM\Column(name="path", type="string", length=255)
      */
     private $path;
-
 
     /**
      * Get id
@@ -76,28 +74,6 @@ class CategoryTree
         return $this->type;
     }
 
-    /**
-     * Set node
-     *
-     * @param integer $node
-     * @return CategoryTree
-     */
-    public function setNode($node)
-    {
-        $this->node = $node;
-    
-        return $this;
-    }
-
-    /**
-     * Get node
-     *
-     * @return integer 
-     */
-    public function getNode()
-    {
-        return $this->node;
-    }
 
     /**
      * Set path
@@ -120,5 +96,29 @@ class CategoryTree
     public function getPath()
     {
         return $this->path;
+    }
+
+
+    /**
+     * Set node
+     *
+     * @param \Azgil\CategoryBundle\Entity\CategoryNode $node
+     * @return CategoryTree
+     */
+    public function setNode(\Azgil\CategoryBundle\Entity\CategoryNode $node = null)
+    {
+        $this->node = $node;
+    
+        return $this;
+    }
+
+    /**
+     * Get node
+     *
+     * @return \Azgil\CategoryBundle\Entity\CategoryNode 
+     */
+    public function getNode()
+    {
+        return $this->node;
     }
 }

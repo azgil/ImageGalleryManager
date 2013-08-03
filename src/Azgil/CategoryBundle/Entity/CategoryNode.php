@@ -3,6 +3,7 @@
 namespace Azgil\CategoryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * CategoryNode
@@ -35,6 +36,19 @@ class CategoryNode
      */
     private $type;
 	
+    /**
+     * @ORM\OneToMany(targetEntity="CategoryTree", mappedBy="node")
+     */
+    private $trees;
+
+    public function __construct()
+    {
+        $this->trees = new ArrayCollection();
+    }
+    
+    
+    
+
     /**
      * Get id
      *
@@ -89,5 +103,40 @@ class CategoryNode
     public function getType()
     {
         return $this->type;
+    }
+
+    
+
+    /**
+     * Add trees
+     *
+     * @param \Azgil\CategoryBundle\Entity\CategoryTree $trees
+     * @return CategoryNode
+     */
+    public function addTree(\Azgil\CategoryBundle\Entity\CategoryTree $trees)
+    {
+        $this->trees[] = $trees;
+    
+        return $this;
+    }
+
+    /**
+     * Remove trees
+     *
+     * @param \Azgil\CategoryBundle\Entity\CategoryTree $trees
+     */
+    public function removeTree(\Azgil\CategoryBundle\Entity\CategoryTree $trees)
+    {
+        $this->trees->removeElement($trees);
+    }
+
+    /**
+     * Get trees
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTrees()
+    {
+        return $this->trees;
     }
 }
