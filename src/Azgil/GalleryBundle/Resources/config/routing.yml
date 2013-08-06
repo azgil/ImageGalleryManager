@@ -6,10 +6,14 @@ azgil_gallery_showimageaction:
     pattern: /showimage
     defaults: { _controller: AzgilGalleryBundle:Default:showImage }
 
-AzgilGalleryBundle_gallery:
-    resource: "@AzgilGalleryBundle/Resources/config/routing/picture.yml"
-    prefix:   /picture
+#AzgilGalleryBundle_gallery:
+#    resource: "@AzgilGalleryBundle/Resources/config/routing/picture.yml"
+#    prefix:   /picture
 
 azgil_gallery_caroufredsel:
     pattern: /caroufredsel
     defaults: { _controller: AzgilGalleryBundle:Default:caroufredsel }
+
+azgil_gallery_gridview:
+    pattern: /caroufredsel
+    defaults: { _controller: AzgilGalleryBundle:Default:gridView }

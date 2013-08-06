@@ -32,4 +32,15 @@ class DefaultController extends Controller
             'entities' => $entities,
         ));
     }
+    
+    public function gridViewAction(){
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('AzgilGalleryBundle:Picture')->findBy(array('isActive' => TRUE, 'visible' => TRUE)
+                                                                      );
+
+        return $this->render('AzgilGalleryBundle:Default:caroufredsel.html.twig', array(
+            'entities' => $entities,
+        ));
+    }
 }

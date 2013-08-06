@@ -4,7 +4,6 @@ namespace Azgil\CategoryBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Azgil\CategoryBundle\Doctrine\Tree;
-use Symfony\Component\HttpFoundation\Request;
 use \Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
