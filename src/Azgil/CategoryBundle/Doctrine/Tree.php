@@ -11,8 +11,7 @@ class Tree {
 	}
 	
 	public function generateTree($type){		
-		$cat_table = $this->em->getRepository('AzgilCategoryBundle:CategoryTree')->findBy(
-				array('type'=> $type),array('path' => 'ASC'));
+		$cat_table = $this->em->getRepository('AzgilCategoryBundle:CategoryTree')->findAllJoinedToCategoryNode($type);
 		$result = '<ul><br>'."\n";
 		$prev = '-';
 		foreach ($cat_table as $tag) {
