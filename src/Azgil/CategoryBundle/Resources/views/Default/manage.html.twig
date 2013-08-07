@@ -13,7 +13,7 @@
 			border: solid thin black  ;
 			padding-top: 10px;
 			padding-left: 10px;
-			font-size: small;			
+			font-size: small;
 		}
 		body {
 			direction: rtl;
@@ -27,14 +27,25 @@
 			background-color: green;
 			height: 40px;
 		}
+		.hhh , nodes li:hover{
+			background-color: blue;
+		}
     </style>
     <script type="text/javascript">
 		$("document").ready(function(){
+
+			$("tree").find("li").mouseover(function(event){
+				event.stopPropagation();
+				$("tree").find("li").removeClass("hhh");
+				$(this).addClass("hhh");
+			});
+
+			
 			
 			$("#save_tree").click(function(){
 				//alert($("tree").html());
 				$("rrr").html('init');
-				$.post( '{{path("AzgilCategoryBundle_saveTree")}}' ,{htm:$("tree").html()},function(response){
+				$.post( '{{path("AzgilCategoryBundle_saveTree")}}' ,{htm:$("tree").html(), type:1},function(response){
                                 if(response.code == 100 && response.success){
                                     $("rrr").html(response.nodes);
                                 }
@@ -48,6 +59,7 @@
 				connectWith: "tree ul , Nodes ul",
 				revert: "true"
 			}).disableSelection();			
+
 			
 			$("nodes ul").sortable({
 				helper: "clone",
