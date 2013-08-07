@@ -17,7 +17,7 @@ class Tree {
 		$prev = '-';
 		foreach ($cat_table as $tag) {
 			$prev_len = strlen($prev);
-			$current_len = strlen($tag->getNode()->getName());
+			$current_len = strlen($tag->getPath());
 			$current_level = $current_len/4;
 			$prev_level = $prev_len/4;
 			 
@@ -25,7 +25,7 @@ class Tree {
 		
 			if ( $current_len > $prev_len) {
 				$result .= str_repeat("\t", $current_level).
-				'<li id = "' . $tag->getId() . '">'.$tag->getNode()->getName()."\n".
+				'<li id = "' . $tag->getNode()->getId() . '"><a>'.$tag->getNode()->getName().'</a>' ."\n".
 				str_repeat("\t", $current_level+1).
 				'<ul><br>'."\n";
 			}
@@ -36,7 +36,7 @@ class Tree {
 				str_repeat("\t", $current_level).
 				'</li>'."\n".
 				str_repeat("\t", $current_level).
-				'<li id = "' . $tag->getId() . '">'.$tag->getNode()->getName()."\n".
+				'<li id = "' . $tag->getNode()->getId() . '"><a>'.$tag->getNode()->getName().'</a>' ."\n".
 				str_repeat("\t", $current_level+1).
 				'<ul><br>'."\n";
 			}		
@@ -53,11 +53,11 @@ class Tree {
 				str_repeat("\t", $current_level).
 				'</li>'."\n".
 				str_repeat("\t", $current_level).
-				'<li id = "' . $tag->getId() . '">'.$tag->getNode()->getName()."\n".
+				'<li id = "' . $tag->getNode()->getId() . '"><a>'.$tag->getNode()->getName().'</a>'."\n".
 				str_repeat("\t", $current_level+1).
 				'<ul><br>'."\n";		
 			}
-			$prev = $tag->getNode()->getName();
+			$prev = $tag->getPath();
 		}		 
 		for ($j = $current_level; $j > 0; $j--){
 			$result .= str_repeat("\t",$j+1 ).
@@ -84,7 +84,7 @@ class Tree {
 		
 		$result = '<ul>';
 		foreach ($nodes as $node) {
-			$result .= '<li>'.$node->getName().
+			$result .= '<li id="'.$node->getId().'">'.$node->getName().
 			'<ul><br></ul></li>';
 		}
 		return $result.'</ul>';
