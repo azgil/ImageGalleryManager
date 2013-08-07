@@ -15,5 +15,5 @@ azgil_gallery_caroufredsel:
     defaults: { _controller: AzgilGalleryBundle:Default:caroufredsel }
 
 azgil_gallery_gridview:
-    pattern: /caroufredsel
+    pattern: /gridview
     defaults: { _controller: AzgilGalleryBundle:Default:gridView }

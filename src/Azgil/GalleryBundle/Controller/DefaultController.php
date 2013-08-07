@@ -39,7 +39,7 @@ class DefaultController extends Controller
         $entities = $em->getRepository('AzgilGalleryBundle:Picture')->findBy(array('isActive' => TRUE, 'visible' => TRUE)
                                                                       );
 
-        return $this->render('AzgilGalleryBundle:Default:caroufredsel.html.twig', array(
+        return $this->render('AzgilGalleryBundle:Default:gridview.html.twig', array(
             'entities' => $entities,
         ));
     }

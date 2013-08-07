@@ -1,0 +1,22 @@
+<table>
+    <thead>
+    </thead>
+    <tbody>
+        <tr>
+            {% for picture in entities %}
+                {% if loop.index0%5 == 0 %}
+            </tr><tr>
+                {% endif %}
+                    <td>
+                        <a href="#">
+                            <img src="{{ asset(picture.getWebPath) }}"
+                                 alt="{{ picture.getTitle }}"
+                                 title="{{ picture.getTitle }}" />
+                        </a>
+                    </td>
+            {% else %}
+            <li><em>no image found</em></li>        
+            {% endfor %}
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,38 @@
+{% extends 'AzgilGalleryBundle:Default:layout.html.twig' %}
+
+{% block meta %}
+{% endblock %}
+
+{% block stylesheets %}
+<link href="{{ asset('bundles/azgilgallery/css/style.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascript %}
+<!-- SlidesJS Required: Link to jQuery -->
+<script src="{{ asset('js/jquery.js') }}"></script>
+<!-- End SlidesJS Required -->
+
+<!-- SlidesJS Required: Link to jquery.slides.js -->
+<script src="{{ asset('bundles/azgilgallery/js/jquery.carouFredSel.min.js') }}"></script>
+<!--<script src="{{ asset('bundles/azgilgallery/js/helper-plugins/jquery.ba-throttle-debounce.min.js') }}"></script>
+<script src="{{ asset('bundles/azgilgallery/js/helper-plugins/jquery.mousewheel.min.js') }}"></script>
+<script src="{{ asset('bundles/azgilgallery/js/helper-plugins/jquery.transit.min.js') }}"></script>-->
+<script src="{{ asset('bundles/azgilgallery/js/helper-plugins/jquery.touchSwipe.min.js') }}"></script>
+<!-- End SlidesJS Required -->
+{% endblock %}
+
+{% block body %}
+<div id="container">
+
+    <!-- The container is used to define the width of the slideshow -->
+    <div id="content">
+        <div class="images">
+              {{ include('AzgilGalleryBundle:Default:imagetabular.html.twig') }}
+            </div>
+
+  {% block javascripts %}
+
+  {% endblock %}
+        </div>
+    </div>
+{% endblock %}
