@@ -1,3 +1,7 @@
+acme_test_gregwar:
+    pattern:  /gregwar
+    defaults: { _controller: AcmeTestBundle:Gregwar:index }
+    
 acme_test_upload:
     pattern:  /
     defaults: { _controller: AcmeTestBundle:Upload:index }

@@ -112,8 +112,10 @@ class UploadController extends Controller {
             $new_name = $UploadedTmpFiles->getId();
         }
         try {
-            $this->get('punk_ave.file_uploader')->handleMyFileUpload(array('folder' => 'tmp/' . $editId,
-                'new_name' => $new_name));
+			$image_handling = $this->get('image.handling');
+            $this->get('punk_ave.file_uploader')->myHandleFileUpload(array('folder' => 'tmp/' . $editId,
+                'new_name' => $new_name,
+				'image_handling' => $image_handling));
         } catch (Exception $exc) {
             $UploadedTmpFiles->setSuccess(FALSE);
             $em->persist($UploadedTmpFiles);
